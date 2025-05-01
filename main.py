@@ -60,8 +60,8 @@ def _get_current_time() -> str:
 def generate_audit_report() -> None:
     logger.info("Starting audit report generation")
     os.makedirs("data", exist_ok=True)
-    if "audit_data.csv" in os.listdir("data/"):
-        logger.warning("audit_data.csv already exists")
+    if "audit_data_3.csv" in os.listdir("data/"):
+        logger.warning("audit_data_3.csv already exists")
         if input("Do you want to reset it? (y/n): ") != "y":
             logger.info("Exiting program")
             return
@@ -156,7 +156,7 @@ def update_today_balance() -> None:
         difference_percent = (difference / projected) * 100
         df.loc[df["date"] == TODAY, "difference_percent"] = f"{difference_percent:.2f}%"
 
-    df.to_csv("data/audit_data.csv", index=False)
+    df.to_csv(DATA_FILE_PATH, index=False)
     logger.info(f"Today's ({TODAY}) balance updated to {input_balance:_.2f}")
     logger.info(f"Difference from projected: {difference:_.2f} ({difference_percent:.2f}%)")
 
